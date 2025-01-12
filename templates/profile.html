@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Rapid Learn</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-glow: rgb(99, 102, 241);
+            --secondary-glow: rgb(79, 70, 229);
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --bg-gradient-start: #0f172a;
+            --bg-gradient-end: #1e1b4b;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --input-bg: rgba(51, 65, 85, 0.9);
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+            background-attachment: fixed;
+            color: var(--text-primary);
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            flex: 1 0 auto;
+        }
+
+        .navbar {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+            backdrop-filter: blur(8px);
+            margin: -1rem -1rem 1rem -1rem;
+            padding: 1rem;
+            width: calc(100% + 2rem);
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .title-gradient {
+            background: linear-gradient(45deg, #f1f5f9, #e2e8f0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: titleGlow 3s infinite alternate;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-link {
+            color: var(--text-secondary) !important;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            border-radius: 0.5rem;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary) !important;
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+
+        .summary-card {
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(99, 102, 241, 0.15);
+        }
+
+        .btn-delete {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-delete:hover {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            transform: translateY(-2px);
+        }
+
+        .summary-content {
+            margin-top: 1rem;
+            padding: 1.5rem;
+            background: rgba(51, 65, 85, 0.5);
+            border-radius: 0.8rem;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            transition: all 0.3s ease;
+            color: #e2e8f0;
+            line-height: 1.8;
+        }
+
+        .summary-content:hover {
+            background: rgba(51, 65, 85, 0.6);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .summary-date {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            opacity: 0.8;
+        }
+
+        .video-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .video-link:hover {
+            color: var(--primary-glow);
+            text-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes titleGlow {
+            from { text-shadow: 0 0 10px rgba(147, 51, 234, 0.5); }
+            to { text-shadow: 0 0 20px rgba(147, 51, 234, 0.8); }
+        }
+
+        /* Markdown content styling */
+        .summary-content h3 {
+            color: #f8fafc;
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .summary-content ul {
+            margin-left: 1.5em;
+            margin-bottom: 1em;
+            color: #e2e8f0;
+        }
+
+        .summary-content li {
+            margin-bottom: 0.8em;
+        }
+
+        .summary-content strong {
+            color: rgb(129, 140, 248);
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .summary-content em {
+            color: #cbd5e1;
+            font-style: italic;
+        }
+
+        .summary-content p {
+            margin-bottom: 1em;
+            color: #e2e8f0;
+        }
+
+        /* Add a subtle text shadow for better contrast */
+        .summary-content, 
+        .summary-content p, 
+        .summary-content li {
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer {
+            flex-shrink: 0;
+            background: var(--card-bg);
+            border-top: 1px solid rgba(99, 102, 241, 0.2);
+            padding: 1rem 0;
+            margin-top: auto;
+            backdrop-filter: blur(8px);
+        }
+
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            font-weight: 500;
+        }
+
+        .github-link:hover {
+            transform: translateY(-3px);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 
+                0 0 25px rgba(255, 255, 255, 0.1),
+                0 4px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .github-link svg {
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
+        }
+
+        .github-link:hover svg {
+            filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.4));
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <nav class="navbar navbar-expand-lg navbar-dark mb-4">
+            <div class="container">
+                <a class="navbar-brand title-gradient" href="{{ url_for('index') }}">Rapid Learn</a>
+                <div class="navbar-nav">
+                    <a class="nav-link" href="{{ url_for('index') }}">Video Summaries</a>
+                    <a class="nav-link" href="{{ url_for('custom_quiz_page') }}">Custom Quiz</a>
+                    <a class="nav-link active" href="{{ url_for('profile') }}">Profile</a>
+                </div>
+            </div>
+        </nav>
+
+        <h2 class="title-gradient mb-4">Your Summaries</h2>
+        
+        <div class="row">
+            {% for summary in summaries %}
+            <div class="col-12">
+                <div class="card summary-card p-4" data-summary-id="{{ summary.id }}">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h5 class="card-title mb-0">
+                                <a href="{{ summary.video_url }}" target="_blank" class="video-link">
+                                    {{ summary.video_title or 'YouTube Video' }}
+                                </a>
+                            </h5>
+                            <div class="d-flex align-items-center">
+                                <span class="summary-date me-3">
+                                    {{ summary.created_at.strftime('%Y-%m-%d %H:%M') }}
+                                </span>
+                                <button onclick="deleteSummary({{ summary.id }})" class="btn btn-delete">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="summary-content mt-3">
+                            {{ summary.summary_text | markdown | safe }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            {% if not summaries %}
+            <div class="col-12 text-center">
+                <div class="card p-5">
+                    <h4 class="text-secondary mb-3">No summaries yet</h4>
+                    <p class="text-light mb-4">Start by creating your first summary!</p>
+                    <a href="{{ url_for('index') }}" class="btn glow-button text-white">
+                        Create Summary
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+    async function deleteSummary(summaryId) {
+        if (confirm('Are you sure you want to delete this summary?')) {
+            try {
+                const response = await fetch(`/delete_summary/${summaryId}`, {
+                    method: 'DELETE',
+                });
+                
+                if (response.ok) {
+                    const summaryCard = document.querySelector(`[data-summary-id="${summaryId}"]`);
+                    if (summaryCard) {
+                        summaryCard.parentElement.remove(); // Remove the parent col-12 div
+                        
+                        // Check if there are no summaries left
+                        const remainingSummaries = document.querySelectorAll('.summary-card');
+                        if (remainingSummaries.length === 0) {
+                            location.reload(); // Reload to show the "No summaries" message
+                        }
+                    }
+                } else {
+                    const errorData = await response.json();
+                    alert(errorData.error || 'Failed to delete summary');
+                }
+            } catch (error) {
+                console.error('Delete error:', error);
+                alert('An error occurred while deleting the summary. Please try again.');
+            }
+        }
+    }
+    </script>
+
+    <footer class="footer">
+        <div class="container text-center">
+            <a href="https://github.com/SarthakChoyal" target="_blank" class="github-link">
+                <svg height="20" width="20" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+                Created by Sarthak Choyal
+            </a>
+        </div>
+    </footer>
+</body>
+</html> 
