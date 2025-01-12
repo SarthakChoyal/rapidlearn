@@ -17,6 +17,10 @@ Rapid Learn is an AI-powered learning assistant that helps you quickly understan
 - YouTube video URL
 - Groq API Key (Free)
 
+### Download Files
+[Download](https://downgit.github.io/#/home?url=https://github.com/SarthakChoyal/rapidlearn)
+
+
 ### Setting Up Groq API Key
 1. Visit [Groq](https://groq.com/) and create a free account
 2. Navigate to API Keys in your Groq console
